@@ -36,13 +36,15 @@ static NSString *const NSJSONKitErrorDomain = @"me.c0ming.JSONKit";
 - (NSData *)JSONDataWithOptions:(NSJSONWritingOptions)opt error:(NSError **)error {
     NSData *JSONData = nil;
 
-    //If obj will not produce valid JSON, an exception is thrown. This exception is thrown prior to parsing and represents a programming error, not an internal error.
+    // If obj will not produce valid JSON, an exception is thrown.
+    // This exception is thrown prior to parsing and represents a programming error, not an internal error.
     if ([NSJSONSerialization isValidJSONObject:self]) {
         JSONData = [NSJSONSerialization dataWithJSONObject:self options:opt error:error];
-    }
-    else {
+    } else {
         if (error) {
-            *error = [NSError errorWithDomain:NSJSONKitErrorDomain code:-1 userInfo:@{ NSLocalizedFailureReasonErrorKey:@"This is not a valid JSONObject" }];
+            *error = [NSError errorWithDomain:NSJSONKitErrorDomain
+                                         code:-1
+                                     userInfo:@{ NSLocalizedFailureReasonErrorKey:@"This is not a valid JSONObject" }];
         }
     }
 
