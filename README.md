@@ -9,10 +9,10 @@ import Foundation
 
 extension Collection {
     func toJSONString() -> String? {
-        if let JSONData = self.toJSONData() {
-            return String(data: JSONData, encoding: .utf8)
+        guard let JSONData = self.toJSONData() else {
+            return nil
         }
-        return nil
+        return String(data: JSONData, encoding: .utf8)
     }
     
     func toJSONData() -> Data? {
